@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>和你一樣的人</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@300;500&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+/* VOICE: 紀念特展海報的語氣：沉重但有力，用印刷與塗銷說話
+   IDEA: 被紅色粗條塗銷的判決書；斜向的紅條之間，露出真實判決理由的碎片
+   PICTURE: 右側直書大標「和你一樣的人／被帶走了」，帶油墨斑駁；中間斜紅條夾著直排判決原文
+   COLOUR and TYPE: 米色紙底、朱紅、青綠；Noto Sans TC 900 大字，Lexend Giga 寬體拉丁數字
+   LAYOUT: 左欄青綠資訊與點線分隔的表單，結果區延續同一張紙：圈起來的數字、刑度、卷宗卡 */
+:root{color-scheme:light;--bg:#f3ead9;--red:#f2443d;--teal:#0e9472;--deep:#0a5c47;--dot:radial-gradient(circle,var(--teal) 1.4px,transparent 1.6px)}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--deep);font:16px/1.65 "Noto Sans TC",system-ui,sans-serif;overflow-x:clip}
+.lat{font-family:"Lexend Giga",sans-serif;font-weight:300;letter-spacing:-.02em}
+.ink{filter:url(#ink)}
+.rule{height:4px;background:var(--dot) 0 50%/9px 4px repeat-x}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+
+.hero{position:relative;min-height:min(820px,100svh);padding:clamp(24px,4vw,56px) max(4vw,16px);display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr) auto;gap:24px;overflow:hidden}
+.bars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.left{position:relative;z-index:2;display:flex;flex-direction:column;gap:22px;align-self:start}
+.years{font-size:clamp(30px,4.2vw,52px);line-height:1;color:var(--teal)}
+.en{font-family:"Lexend Giga",sans-serif;font-weight:500;font-size:clamp(17px,1.7vw,21px);line-height:1.25;color:var(--teal);font-variant:small-caps;margin:0}
+.lede{margin:0;font-weight:500;max-width:30em}
+form{display:grid;gap:0;background:var(--bg)}
+.row{display:grid;grid-template-columns:4.2em minmax(0,1fr);align-items:center;gap:14px;padding:14px 4px}
+.row>span{font-weight:900;font-size:20px;color:var(--teal)}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:44px;height:44px;border:2px solid var(--teal);border-radius:50%;background:none;color:var(--teal);font-size:22px;font-weight:700;cursor:pointer;line-height:1}
+.step input{width:3.2em;height:48px;border:0;background:none;text-align:center;font-family:"Lexend Giga",sans-serif;font-size:30px;color:var(--teal);-moz-appearance:textfield}
+.step input::-webkit-inner-spin-button{-webkit-appearance:none}
+.step small{font-weight:900;font-size:20px;color:var(--teal)}
+.seg{display:flex;gap:8px}
+.seg button{height:46px;padding:0 22px;border:2px solid var(--teal);border-radius:999px;background:none;font-weight:900;font-size:19px;color:var(--teal);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--teal);color:var(--bg)}
+select{height:48px;width:100%;padding:0 38px 0 12px;border:2px solid var(--teal);border-radius:999px;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%230e9472' stroke-width='2.5'/%3E%3C/svg%3E") no-repeat right 16px center;-webkit-appearance:none;appearance:none;font-weight:900;font-size:19px;color:var(--teal)}
+.go{margin-top:18px;height:58px;border:0;border-radius:4px;background:var(--red);color:var(--bg);font-weight:900;font-size:22px;letter-spacing:.2em;cursor:pointer}
+.title{position:relative;z-index:2;grid-column:3;margin:0;writing-mode:vertical-rl;font-weight:900;font-size:clamp(64px,10.5vw,150px);line-height:1.02;letter-spacing:-.04em;color:var(--red);align-self:start;justify-self:end}
+.vtag{position:relative;z-index:2;grid-column:2;justify-self:end;align-self:start;writing-mode:vertical-rl;font-family:"Lexend Giga",sans-serif;font-weight:500;font-size:14px;color:var(--teal);line-height:1.5;margin:0}
+
+.band{padding:clamp(36px,5vw,72px) max(4vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+h2{font-weight:900;font-size:clamp(24px,2.8vw,32px);line-height:1.15;color:var(--teal);margin:0 0 16px}
+.top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.count{position:relative;display:inline-block;padding:clamp(18px,3vw,40px) clamp(40px,6vw,90px)}
+.count .n{font-family:"Lexend Giga",sans-serif;font-weight:500;font-size:clamp(84px,13vw,176px);line-height:1;color:var(--red);font-variant-numeric:tabular-nums;letter-spacing:-.06em}
+.count .u{font-weight:900;font-size:clamp(28px,3vw,40px);color:var(--red);margin-left:6px}
+.count svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.count ellipse{fill:none;stroke:var(--teal);stroke-width:3;stroke-dasharray:1400;stroke-dashoffset:0}
+.count.draw ellipse{animation:draw 1.1s ease-out}
+@keyframes draw{from{stroke-dashoffset:1400}}
+.say{font-weight:900;font-size:clamp(22px,2.6vw,32px);line-height:1.35;color:var(--teal);margin:0;text-wrap:balance}
+.note{font-size:14px;color:var(--deep);margin:12px 0 0}
+.grid2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);margin-top:clamp(36px,5vw,64px)}
+.sent{display:grid;gap:12px}
+.s{display:grid;grid-template-columns:8.5em minmax(0,1fr) 3.4em;gap:12px;align-items:center;font-weight:700}
+.s i{display:block;height:22px;background:var(--teal);transform:skewX(-28deg)}
+.s.d i{background:var(--red)}
+.s b{text-align:right;font-family:"Lexend Giga",sans-serif;font-weight:500;font-size:15px;white-space:nowrap}
+.dec{display:flex;gap:8px;align-items:flex-end;height:190px}
+.dec div{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;font-family:"Lexend Giga",sans-serif;font-size:13px}
+.dec span{display:block;width:100%;background:var(--red);min-height:2px}
+.dec em{font-style:normal;font-weight:500;color:var(--red)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:28px 36px;margin-top:8px}
+.card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding-top:18px;background:var(--dot) 0 0/9px 4px repeat-x}
+.card .who{writing-mode:vertical-rl;font-weight:900;font-size:30px;line-height:1.05;color:var(--red);letter-spacing:.04em}
+.card .meta{font-weight:700;font-size:14px;color:var(--teal)}
+.card p{margin:10px 0 0;font-size:15.5px;line-height:1.75}
+.card .lab{display:block;font-size:13px;font-weight:700;color:var(--teal)}
+.stamp{display:inline-block;margin-top:12px;border:2.5px solid var(--red);color:var(--red);font-weight:900;font-size:16px;padding:1px 10px;transform:rotate(-3deg)}
+.more{margin-top:28px;height:52px;padding:0 28px;border:2px solid var(--teal);border-radius:999px;background:none;color:var(--teal);font-weight:900;font-size:18px;cursor:pointer}
+.alt{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:36px;margin-top:36px}
+.alt h3{font-weight:900;font-size:22px;color:var(--teal);margin:16px 0 4px}
+.alt .note{margin:0 0 14px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opt{min-height:46px;padding:6px 18px;border:2px solid var(--teal);border-radius:999px;background:none;color:var(--teal);font-weight:900;font-size:17px;cursor:pointer}
+.opt b{font-family:"Lexend Giga",sans-serif;font-weight:500;font-size:14px;color:var(--red);margin-left:8px}
+.opt:hover{background:var(--teal);color:var(--bg)}.opt:hover b{color:var(--bg)}
+footer{font-size:13.5px}
+footer p{max-width:82ch;margin:0 0 8px}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:minmax(0,1fr) auto;min-height:0}
+  .left{grid-column:1;grid-row:2}
+  .title{grid-column:1/-1;grid-row:1;min-height:clamp(380px,90vw,620px)}
+  .left{grid-column:1/-1}
+  .top,.grid2{grid-template-columns:1fr}
+}
+@media(max-width:900px){.vtag{display:none}.title{justify-self:end}}
+@media(max-width:520px){.title{font-size:clamp(58px,20vw,96px)}.s{grid-template-columns:6.8em minmax(0,1fr) 3em;font-size:14px}}
+@media(prefers-reduced-motion:reduce){.count.draw ellipse{animation:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -4 0 0 0 3.45" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in" result="c"/><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="9" result="w"/><feDisplacementMap in="c" in2="w" scale="4"/></filter></svg>
+
+<header class="hero">
+  <svg class="bars" id="bars" aria-hidden="true"></svg>
+  <div class="left">
+    <div class="years lat">1947–1992</div>
+    <p class="en">People like you,<br>taken away</p>
+    <p class="lede">這四十多年間，有 14,946 人在臺灣因政治案件被捕、受審。輸入你現在的年紀、性別和職業，看看當年有多少跟你一樣的人。</p>
+    <form id="f">
+      <div class="rule"></div>
+      <div class="row"><span>年齡</span><div class="step"><button type="button" id="dn" aria-label="減一歲">−</button><input id="age" type="number" min="12" max="80" value="30" inputmode="numeric" aria-label="年齡"><button type="button" id="up" aria-label="加一歲">＋</button><small>歲</small></div></div>
+      <div class="rule"></div>
+      <div class="row"><span>性別</span><div class="seg" role="group" aria-label="性別"><button type="button" data-g="0" aria-pressed="true">男</button><button type="button" data-g="1" aria-pressed="false">女</button></div></div>
+      <div class="rule"></div>
+      <div class="row"><span>職業</span><select id="occ" aria-label="職業"></select></div>
+      <div class="rule"></div>
+      <button class="go" type="submit">查看</button>
+    </form>
+  </div>
+  <p class="vtag">Taiwan Transitional Justice Database · 14,946 records</p>
+  <h1 class="title ink">和你一樣的人<br>被帶走了</h1>
+</header>
+
+<section class="band" id="res" hidden><div class="wrap">
+  <div id="zero" hidden>
+    <div class="top">
+      <div class="count"><span class="n">0</span><span class="u">人</span><svg viewBox="0 0 100 60" preserveAspectRatio="none"><ellipse cx="50" cy="30" rx="49" ry="28" transform="rotate(-4 50 30)" vector-effect="non-scaling-stroke"/></svg></div>
+      <p class="say" id="zsay"></p>
+    </div>
+    <div class="alt">
+      <div><div class="rule"></div><h3>同樣的職業，放寬年齡</h3><p class="note" id="za"></p><div class="opts" id="zaopt"></div></div>
+      <div><div class="rule"></div><h3>同樣的年紀，其他職業</h3><p class="note" id="zb"></p><div class="opts" id="zbopt"></div></div>
+    </div>
+  </div>
+  <div id="found">
+    <div class="top">
+      <div class="count" id="cbox"><span class="n" id="n">0</span><span class="u">人</span><svg viewBox="0 0 100 60" preserveAspectRatio="none"><ellipse cx="50" cy="30" rx="49" ry="28" transform="rotate(-4 50 30)" vector-effect="non-scaling-stroke"/></svg></div>
+      <div><p class="say" id="say"></p><p class="note" id="note"></p></div>
+    </div>
+    <div class="grid2">
+      <div><h2>最終判決或處分</h2><div class="sent" id="sent"></div><p class="note">依各案最終一份判決或處分文書。不起訴者多半仍曾遭逮捕、羈押與偵訊。</p></div>
+      <div><h2>受審年代</h2><div class="dec" id="dec"></div></div>
+    </div>
+    <div style="margin-top:clamp(40px,6vw,80px)">
+      <h2>判決書上的理由</h2>
+      <p class="note" style="margin:0 0 22px;max-width:62ch">從這些人的卷宗隨機抽出。理由是當年判決書的原文，用語是官方當時的用語，不是事實認定。</p>
+      <div class="cards" id="cards"></div>
+      <button class="more" id="more" type="button">再抽幾位</button>
+    </div>
+  </div>
+</div></section>
+
+<footer class="band"><div class="wrap">
+  <div class="rule" style="margin-bottom:18px"></div>
+  <p>資料來源：促進轉型正義委員會「臺灣轉型正義資料庫」（14,946 筆，2022 年 4 月 20 日版）。年齡為受審時年齡，預設比對你輸入年齡的上下 2 歲；職業由原始文字粗分為 15 類，可能有誤差；年代以最終判決或處分日期為準。</p>
+  <p>資料庫收錄的是政治案件的當事人，不全是冤案；有些人確實參與組織或行動，但都在不受憲法保障的軍法程序下受審。</p>
+</div></footer>
+
+<script>
+{
+const $=id=>document.getElementById(id);
+let D=null,g=0,match=[],tol=2;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pick=(age,o,t)=>{const m=[];D.rows.forEach((r,i)=>{if(r[0]===g&&r[2]===o&&r[1]>=0&&Math.abs(r[1]-age)<=t)m.push(i)});return m};
+const occLabel=o=>D.occ[o]==='無業'?'沒有工作的':D.occ[o]==='其他'?'從事其他職業的':'當'+D.occ[o]+'的';
+const range=(age,t)=>`${Math.max(0,age-t)}到${age+t}歲`;
+
+/* 斜向紅條與判決碎片 */
+let frags=['本部為確保本省治安秩序','參加叛亂之組織','明知為匪諜而不告密檢舉','以文字圖畫演說為有利於叛徒之宣傳','交付感化','意圖以非法之方法顛覆政府'];
+function bars(){
+  const s=$('bars'),W=s.clientWidth,H=s.clientHeight;if(!W)return;
+  const hr=s.getBoundingClientRect(),narrow=W<900;
+  const edge=Math.min(...['.title','.vtag'].map(q=>document.querySelector(q)).filter(e=>e.offsetWidth).map(e=>e.getBoundingClientRect().left))-hr.left-14;
+  const yb=narrow?document.querySelector('.left').getBoundingClientRect().top-hr.top-14:H;
+  const x0=narrow?-yb*.25:W*.42,span=narrow?edge+yb*.3:Math.max(80,edge-W*.42),n=narrow?6:9,L=Math.max(H,yb)*2.4;
+  let out='',seed=7;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+  for(let i=0;i<n;i++){
+    const x=x0+span*i/n,w=6+rnd()*(i%3===1?46:22),cx=x,cy=yb*.5;
+    out+=`<g transform="rotate(28 ${cx} ${cy})">`;
+    let y=cy-L/2;
+    while(y<cy+L/2){
+      const h=40+rnd()*260,gap=8+rnd()*26;
+      out+=`<rect x="${cx}" y="${y}" width="${w}" height="${h}" fill="var(--red)"/>`;
+      y+=h+gap;
+      if(rnd()<.28&&frags.length){const t=frags[Math.floor(rnd()*frags.length)].slice(0,16);
+        out+=`<text x="${cx+w/2}" y="${y}" style="writing-mode:vertical-rl" font-size="15" font-weight="900" fill="var(--red)">${esc(t)}</text>`;y+=t.length*16+14}
+    }
+    out+='</g>';
+  }
+  s.innerHTML=`<clipPath id="bc"><rect x="0" y="0" width="${Math.max(0,edge)}" height="${Math.max(0,yb)}"/></clipPath><g clip-path="url(#bc)">${out}</g>`;
+}
+const ro=new ResizeObserver(bars);ro.observe($('bars'));
+document.fonts&&document.fonts.ready.then(bars);
+
+function fillOcc(){
+  const cur=$('occ').value;
+  $('occ').innerHTML=D.occ.map((o,i)=>D.rows.some(r=>r[0]===g&&r[2]===i&&r[1]>=0)?`<option value="${i}">${esc(o)}</option>`:'').join('');
+  if([...$('occ').options].some(x=>x.value===cur))$('occ').value=cur;
+}
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{
+  g=+b.dataset.g;document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));if(D)fillOcc()}));
+const bump=d=>{const a=$('age');a.value=Math.min(80,Math.max(12,(+a.value||30)+d))};
+$('dn').addEventListener('click',()=>bump(-1));$('up').addEventListener('click',()=>bump(1));
+
+function run(scroll){
+  if(!D)return;
+  let age=Math.round(+$('age').value||30);age=Math.min(80,Math.max(12,age));$('age').value=age;
+  const o=+$('occ').value,gw=g?'女性':'男性';
+  match=pick(age,o,tol);
+  $('res').hidden=false;
+  match.length?found(age,o,gw):zero(age,o,gw);
+  const c=document.querySelector(match.length?'#found .count':'#zero .count');c.classList.remove('draw');void c.offsetWidth;c.classList.add('draw');
+  if(scroll)$('res').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+}
+function zero(age,o,gw){
+  $('zero').hidden=false;$('found').hidden=true;
+  $('zsay').textContent=`資料庫裡沒有${range(age,tol)}、${occLabel(o)}${gw}。`;
+  const steps=[];let last=0;
+  for(let t=tol+1;t<=70&&steps.length<3;t++){const n=pick(age,o,t).length;if(n>last){steps.push([t,n]);last=n;t+=2}}
+  $('za').textContent=steps.length?`${D.occ[o]}的${gw}，在別的年紀是有的：`:`資料庫裡沒有任何${occLabel(o)}${gw}。`;
+  $('zaopt').innerHTML=steps.map(([t,n])=>`<button type="button" class="opt" data-t="${t}">${range(age,t)}<b>${n} 人</b></button>`).join('');
+  let t=tol,list=[];
+  while(t<=70){list=D.occ.map((x,i)=>[i,pick(age,i,t).length]).filter(([i,n])=>n&&i!==o);if(list.length)break;t+=2}
+  list.sort((a,b)=>b[1]-a[1]);
+  $('zb').textContent=list.length?`${range(age,t)}的${gw}，當年是這些職業：`:'';
+  $('zbopt').innerHTML=list.map(([i,n])=>`<button type="button" class="opt" data-o="${i}" data-t="${t}">${esc(D.occ[i])}<b>${n} 人</b></button>`).join('');
+}
+function found(age,o,gw){
+  $('zero').hidden=true;$('found').hidden=false;
+  const n=match.length;
+  $('n').textContent=n.toLocaleString();
+  const ag=D.rows.filter(r=>r[0]===g&&r[1]>=0&&Math.abs(r[1]-age)<=tol).length;
+  $('say').textContent=`${tol>2?'年齡放寬後，':'跟你一樣，'}${range(age,tol)}、${occLabel(o)}${gw}，在那段時間因政治案件被捕受審。`;
+  $('note').textContent=`不限職業的話，${range(age,tol)}的${gw}共有 ${ag.toLocaleString()} 人。`;
+  const K=[['D','死刑'],['L','無期徒刑'],['T','有期徒刑'],['E','感化教育'],['N','無罪、免訴或免刑'],['P','不起訴'],['','卷宗未載']];
+  const cnt=Object.fromEntries(K.map(k=>[k[0],0]));match.forEach(i=>cnt[D.rows[i][4]]++);
+  const mx=Math.max(1,...Object.values(cnt));
+  $('sent').innerHTML=K.map(([k,l])=>`<div class="s ${k==='D'?'d':''}"><span>${l}</span><span><i style="width:${cnt[k]/mx*100}%"></i></span><b>${cnt[k]}</b></div>`).join('');
+  const decs=[1940,1950,1960,1970,1980,1990],dc=decs.map(d=>match.filter(i=>{const y=D.rows[i][3];return y>=d&&y<d+10}).length),dm=Math.max(1,...dc);
+  $('dec').innerHTML=decs.map((d,j)=>`<div><em>${dc[j]}</em><span style="height:${dc[j]/dm*78}%"></span>${String(d).slice(2)}s</div>`).join('');
+  cards();
+}
+function cards(){
+  const pool=match.filter(i=>D.rows[i][8]),src=pool.length?pool:match;
+  const a=src.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  $('more').hidden=src.length<=6;
+  $('cards').innerHTML=a.slice(0,6).map(i=>{const r=D.rows[i];
+    return `<article class="card"><div>
+      <div class="meta">${r[1]} 歲・${esc(r[7]||'職業未載')}${r[3]?'・'+r[3]+' 年':''}</div>
+      <p><span class="lab">判決所載</span>${r[8]?esc(r[8]):'卷宗中沒有記載理由。'}</p>
+      ${r[5]?`<span class="stamp">${esc(r[5])}</span>`:''}
+    </div><div class="who">${esc(r[6]||'姓名未載')}</div></article>`}).join('');
+}
+$('f').addEventListener('submit',e=>{e.preventDefault();tol=2;run(true)});
+$('more').addEventListener('click',cards);
+$('res').addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;
+  if(b.dataset.o)$('occ').value=b.dataset.o;tol=+b.dataset.t;run(false);$('res').scrollIntoView({block:'start'})});
+
+fetch('data.json').then(r=>r.json()).then(d=>{
+  D=d;fillOcc();$('occ').value=String(d.occ.indexOf('教師'));
+  const rs=d.rows.map(r=>r[8]).filter(t=>t&&t.length>=10&&t.length<=40);
+  frags=Array.from({length:14},()=>rs[Math.floor(Math.random()*rs.length)].replace(/[，。、；：]/g,' ').trim());bars();
+}).catch(()=>{$('f').insertAdjacentHTML('afterend','<p>資料載入失敗，請重新整理。</p>')});
+}
+</script>
+</body>
+</html>
